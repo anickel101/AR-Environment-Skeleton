@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_14_154024) do
+ActiveRecord::Schema.define(version: 2020_08_14_164745) do
 
   create_table "grade_levels", force: :cascade do |t|
     t.integer "student_id"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2020_08_14_154024) do
   create_table "homeworks", force: :cascade do |t|
     t.integer "grade_level_id"
     t.string "status", default: "incomplete"
+    t.string "name"
     t.index ["grade_level_id"], name: "index_homeworks_on_grade_level_id"
   end
 

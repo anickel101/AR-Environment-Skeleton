@@ -17,4 +17,8 @@ class Student < ActiveRecord::Base
         GradeLevel.all.where("grade = ?", grade_level).map {|gl| gl.student}
     end
 
+    def complete_homework(homework)
+        
+    end
+
 end
