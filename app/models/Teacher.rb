@@ -1,5 +1,6 @@
 class Teacher < ActiveRecord::Base
     has_many :grade_levels
+    has_many :homeworks, through: :grade_levels
     has_many :students, through: :grade_levels
 
     #user-defined method that uses AR's auto-attr to check if YoE > 5
