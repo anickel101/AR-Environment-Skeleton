@@ -1,5 +1,8 @@
+require 'pry'
+
 class Student < ActiveRecord::Base
-    belongs_to :teacher
+    has_many :grade_levels
+    has_many :teachers, through: :grade_levels
 
     #attrs are given via ActiveRecord
 
@@ -10,7 +13,22 @@ class Student < ActiveRecord::Base
 
     #This is a user-defined method which uses an AR method "where"
     def self.all_in_grade(grade_level)
-        self.where("grade_level = ?", grade_level)
+
+        self.all.select {|student| student.grades.include?(grade_level)}
+
+        #not working
+        #self.all.where("grades.include?(?)", grade_level)
+        
+        #From one-to-one
+        #self.where("grade_level.grade = ?", grade_level)
+    end
+
+    def teachers
+        self.grade_levels.map {|gl| gl.teacher}
+    end
+
+    def grades
+        self.grade_levels.map {|gl| gl.grade}
     end
 
 end
