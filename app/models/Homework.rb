@@ -1,3 +1,4 @@
 class Homework < ActiveRecord::Base
-    belongs_to :grade_level
+    belongs_to :teacher
+    belongs_to :student
 end

@@ -2,8 +2,9 @@ require 'pry'
 
 class Student < ActiveRecord::Base
     has_many :grade_levels
-    has_many :homeworks, through: :grade_levels
+    has_many :homeworks
     has_many :teachers, through: :grade_levels
+    #has_many :teachers, through: :homeworks
 
     #attrs are given via ActiveRecord
 
@@ -17,8 +18,10 @@ class Student < ActiveRecord::Base
         GradeLevel.all.where("grade = ?", grade_level).map {|gl| gl.student}
     end
 
-    def complete_homework(homework)
-        
+    #homeworks should return all homeworks connected to this student (via AR)
+    
+    def complete_homework
+        self.homeworks.where("status = ?", "incomplete").each {|hw| hw.update(status: "completed")}
     end
 
 end
