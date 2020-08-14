@@ -7,13 +7,4 @@ class Teacher < ActiveRecord::Base
         self.years_of_experience > 5
     end
 
-    def students
-        self.grade_levels.map {|gl| gl.student}
-    end
-
-    def grades
-        self.grade_levels.map {|gl| gl.grade}
-    end
-
-    
 end

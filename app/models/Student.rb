@@ -13,22 +13,7 @@ class Student < ActiveRecord::Base
 
     #This is a user-defined method which uses an AR method "where"
     def self.all_in_grade(grade_level)
-
-        self.all.select {|student| student.grades.include?(grade_level)}
-
-        #not working
-        #self.all.where("grades.include?(?)", grade_level)
-        
-        #From one-to-one
-        #self.where("grade_level.grade = ?", grade_level)
-    end
-
-    def teachers
-        self.grade_levels.map {|gl| gl.teacher}
-    end
-
-    def grades
-        self.grade_levels.map {|gl| gl.grade}
+        GradeLevel.all.where("grade = ?", grade_level).map {|gl| gl.student}
     end
 
 end
